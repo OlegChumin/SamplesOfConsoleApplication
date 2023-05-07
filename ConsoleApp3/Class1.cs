@@ -15,7 +15,14 @@ namespace ConsoleApp3
             //multiplicationTable();
             //isEvenOrOdd();
             //isAnagramm();
-            searchWordByFirstLetter();
+            //searchWordByFirstLetter();
+            //stringsAndSubstrings();
+            //nameAndPatronymic();
+            Console.WriteLine("Вызов программы Марка для расчета чисел Фибоначчи");
+            fibonacciMark();
+            Console.WriteLine();
+            Console.WriteLine("Вызов программы Олега для расчета чисел Фибоначчи");
+            fibonacciOleg();
           
         }
 
@@ -139,17 +146,114 @@ namespace ConsoleApp3
             }
         }
 
-        //Создать консольное приложение, которое запрашивает у пользователя имя и выводит на экран его инициалы в формате "И. О." (первая буква имени и первая буква отчества).
+        //Создать консольное приложение, которое запрашивает у пользователя имя и выводит на экран его инициалы
+        //в формате "И. О." (первая буква имени и первая буква отчества).
+        static void nameAndPatronymic()
+        {
+            Console.WriteLine("Введите своё имя: "); string name = Console.ReadLine();
+            Console.WriteLine("Введите ваше отчество: "); string patronymic = Console.ReadLine();
+            Console.WriteLine($" {name[0]}. {patronymic[0]}.");
+        }
 
-        //Создать консольное приложение, которое запрашивает у пользователя число N и выводит на экран первые N чисел Фибоначчи.
 
-        //Создать консольное приложение, которое запрашивает у пользователя строку и выводит на экран все ее подстроки.
+        //Создать консольное приложение, которое запрашивает у пользователя число N и выводит на экран первые
+        //N чисел Фибоначчи.
+        static void fibonacciMark()
+        {
+
+            Console.Write("Введите число: ");
+            // ввод числа
+            int num = int.Parse(Console.ReadLine());
+            // сумма двух прошлых чисел
+            int sum = 0;
+            //Console.WriteLine(sum);
+            // первое число
+            int first = 1;
+            //Console.WriteLine(first);
+            // второе число
+            int second = 1;
+            Console.Write(first + " " + second + " ");
+
+
+            // цикл while который делает вычисления если num меньше числа sum
+            while (num > sum)
+            {
+                // число в последовательности фибоначчи - сумма первых двух чисел
+                sum = first + second;
+
+                // вывод числа фибаначчи 
+                Console.Write($"{sum} ");
+
+                // последовательность растет
+                first = second;
+                second = sum;
+            }
+        }
+
+        static void fibonacciOleg()
+        {
+            Console.Write("Введите число N: ");
+            int N = int.Parse(Console.ReadLine());
+
+            int first = 0, second = 1;
+            Console.Write(first + " " + second + " ");
+
+            for (int i = 2; i < N; i++)
+            {
+                int fib = first + second;
+                Console.Write(fib + " ");
+
+                first = second;
+                second = fib;
+            }
+
+            Console.ReadLine();
+        }
+
+        //Создать консольное приложение, которое запрашивает у пользователя строку и выводит на экран
+        //все ее подстроки.
+        static void stringsAndSubstrings()
+        {
+            Console.Write("Введите строку: ");
+            string str = Console.ReadLine();
+            List<string> inputList = new List<string>(str.Split(" "));
+            Console.WriteLine(inputList);
+
+            List<string> substrings = new List<string>();
+
+            foreach (string input in inputList)
+            {
+
+                substrings.Add(input);
+            }
+
+            for (int i = 0; i < str.Length; i++)
+            {
+              //for (int j = 0; j <= str.Length; j++)
+                for (int j = i + 1; j <= str.Length; j++) // начинаем со следующей позиции после i
+                {
+                    string subString = str.Substring(i, j - i).Trim();
+
+                    //Console.WriteLine(subString);
+                    substrings.Add(subString);
+                }
+            }
+
+            Console.WriteLine("Все подстроки введенной строки:");
+            foreach (string substring in substrings)
+            {
+                Console.WriteLine(substring);
+            }
+        }
+
+        //Создать консольное приложение, которое запрашивает у пользователя список слов и выводит на экран только
+        //те слова, которые начинаются с заданной буквы.
         static void searchWordByFirstLetter()
         {
             Console.Write("Введите список слов через запятую: ");
             string input = Console.ReadLine();
 
-            Console.Write("Введите букву: ");
+            Console.Write("Введите букву, с которой начинаются искомые слова: ");
             char letter = Console.ReadKey().KeyChar;
 
             string[] words = input.Split(',');
@@ -172,8 +276,6 @@ namespace ConsoleApp3
 
             Console.ReadLine();
         }
-
-        //Создать консольное приложение, которое запрашивает у пользователя список слов и выводит на экран только те слова, которые начинаются с заданной буквы.
 
         //Создать консольное приложение, которое генерирует случайный пароль заданной длины из заданных символов (например, только цифры и заглавные буквы).
     }
