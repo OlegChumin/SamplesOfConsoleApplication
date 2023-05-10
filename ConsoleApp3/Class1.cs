@@ -8,7 +8,7 @@ namespace ConsoleApp3
 {
     internal class Class1
     {
-        static void Main() 
+        static void Main()
         {
             //consoleSum();
             //nameAgeTown();
@@ -18,18 +18,52 @@ namespace ConsoleApp3
             //searchWordByFirstLetter();
             //stringsAndSubstrings();
             //nameAndPatronymic();
-            Console.WriteLine("Вызов программы Марка для расчета чисел Фибоначчи");
-            fibonacciMark();
-            Console.WriteLine();
-            Console.WriteLine("Вызов программы Олега для расчета чисел Фибоначчи");
-            fibonacciOleg();
-          
+            //Console.WriteLine("Вызов программы Марка для расчета чисел Фибоначчи");
+            //fibonacciMark();
+            //Console.WriteLine();
+            //Console.WriteLine("Вызов программы Олега для расчета чисел Фибоначчи");
+            //fibonacciOleg();
+            //Console.WriteLine(getPass());
+
+            glebFindWord();
+        }
+
+
+        static void glebFindWord()
+        {
+            string[] Surname = new string[5];
+            char B;
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write("ведите слово номер " + (i + 1) + ": ");
+                Surname[i] = Console.ReadLine();
+            }
+            Console.Write("Введите букву: ");
+            B = char.Parse(Console.ReadLine());
+            for (int i = 0; i < 5; i++)
+            {
+                if (Surname[i][0] == B) Console.WriteLine(Surname[0]);
+            }
+            Console.ReadKey();
+        }
+
+        public static string getPass()
+        {
+            string pass = "";
+            var r = new Random();
+            while (pass.Length < 16)
+            {
+                Char c = (char)r.Next(33, 125);
+                if (Char.IsLetterOrDigit(c))
+                    pass += c;
+            }
+            return pass;
         }
 
 
         //Создание консольного приложения, запрашивающего у
         //пользователя два числа и выводящего на экран их сумму:
-        static void consoleSum() 
+        static void consoleSum()
         {
             Console.WriteLine("Введите первое число..");
             int num_1 = int.Parse(Console.ReadLine());
@@ -42,7 +76,7 @@ namespace ConsoleApp3
 
         //Создание консольного приложения, запрашивающего у пользователя имя, возраст
         //и город проживания и выводящего на экран приветствие:
-        static void nameAgeTown() 
+        static void nameAgeTown()
         {
             Console.WriteLine("Введите ваше имя..");
             string name = Console.ReadLine();
@@ -57,9 +91,9 @@ namespace ConsoleApp3
         }
 
         //Создание консольного приложения, выводящего на экран таблицу умножения от 1 до 10:
-        static void multiplicationTable() 
+        static void multiplicationTable()
         {
-            for (int i = 1; i <= 10; i++) 
+            for (int i = 1; i <= 10; i++)
             {
                 for (int j = 1; j <= 10; j++)
                 {
@@ -76,11 +110,11 @@ namespace ConsoleApp3
             Console.WriteLine("Введите число для проверки на четность..");
             int number = int.Parse(Console.ReadLine());
 
-            if (number % 2 == 0) 
+            if (number % 2 == 0)
             {
                 Console.WriteLine($"Число {number} является четным");
             }
-            else 
+            else
             {
                 Console.WriteLine($"Число {number} является нечетным");
             }
@@ -125,13 +159,14 @@ namespace ConsoleApp3
                 flag = false;
             }
 
-            if (flag) {
+            if (flag)
+            {
                 for (int i = 0; i < charArrayFromWord_1.Length; i++)
                 {
-                    if (charArrayFromWord_1[i] != charArrayFromWord_2[i]) 
+                    if (charArrayFromWord_1[i] != charArrayFromWord_2[i])
                     {
-                        flag = false ; 
-                        break ;
+                        flag = false;
+                        break;
                     }
                 }
             }
@@ -229,7 +264,7 @@ namespace ConsoleApp3
 
             for (int i = 0; i < str.Length; i++)
             {
-              //for (int j = 0; j <= str.Length; j++)
+                //for (int j = 0; j <= str.Length; j++)
                 for (int j = i + 1; j <= str.Length; j++) // начинаем со следующей позиции после i
                 {
                     string subString = str.Substring(i, j - i).Trim();
@@ -278,5 +313,31 @@ namespace ConsoleApp3
         }
 
         //Создать консольное приложение, которое генерирует случайный пароль заданной длины из заданных символов (например, только цифры и заглавные буквы).
+        static void passGenerator()
+        {
+            {
+                Console.Write("Введите длину пароля: "); // Запрашиваем у пользователя длину пароля
+                int passwordLength = int.Parse(Console.ReadLine()); // Считываем длину пароля, введенную пользователем, и преобразуем ее в целое число
+
+                Console.Write("Введите допустимые символы: "); // Запрашиваем у пользователя допустимые символы для пароля
+                string allowedCharacters = Console.ReadLine(); // Считываем допустимые символы для пароля, введенные пользователем, и сохраняем их в переменной allowedCharacters
+
+                Random random = new Random(); // Создаем экземпляр класса Random для генерации случайных чисел
+                List<char> passwordCharacters = new List<char>(); // Создаем список, который будет хранить символы, из которых будет состоять пароль
+
+                for (int i = 0; i < passwordLength; i++) // Запускаем цикл, который будет генерировать символы пароля нужной длины
+                {
+                    int randomIndex = random.Next(0, allowedCharacters.Length); // Генерируем случайный индекс в диапазоне от 0 до длины строки allowedCharacters
+                    char randomCharacter = allowedCharacters[randomIndex]; // Получаем случайный символ из строки allowedCharacters по сгенерированному индексу
+                    passwordCharacters.Add(randomCharacter); // Добавляем полученный символ в список символов пароля
+                }
+
+                string password = string.Join("", passwordCharacters); // Преобразуем список символов пароля в строку, объединив все символы в одну строку
+
+                Console.WriteLine($"Сгенерированный пароль: {password}"); // Выводим на экран сгенерированный пароль
+
+                Console.ReadLine(); // Ждем, пока пользователь нажмет клавишу Enter, чтобы окно консоли не закрылось сразу после вывода пароля
+            }
+        }
     }
 }
